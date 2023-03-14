@@ -24,21 +24,18 @@ class RockPaperScissors
                     case "rock":
                         if (machineChoice=="scissors")
                         {
-                            Human.Points+=1;
-                            humanWin=true;
+                            HumanWinLose(humanWin:true);
                             continue;
                         }
                         else 
                         {
-                            Human.Points-=1;
-                            humanWin=false;
+                            HumanWinLose(humanWin:false);
                             continue;
                         }
                     case "scissors":
                         if (machineChoice=="paper")
                         {
-                            Human.Points+=1;
-                            humanWin=true;
+                            HumanWinLose(humanWin:true);
                             continue;
                         }
                         else
@@ -49,8 +46,7 @@ class RockPaperScissors
                     case "paper":
                         if (machineChoice=="rock")
                         {
-                            Human.Points+=1;
-                            humanWin=true;
+                            HumanWinLose(humanWin:true);
                             continue;
                         }
                         else
@@ -80,7 +76,7 @@ class RockPaperScissors
         Console.WriteLine("You now have 0 points and cannot continue. Thank you for playing. Game Over.");
         }
 
-        void HumanWinLose(bool humanWin, bool humanTie=false)
+        void HumanWinLose(bool humanWin)
         {
             if (humanWin=true)
             {

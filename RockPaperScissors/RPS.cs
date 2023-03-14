@@ -5,7 +5,8 @@ class RockPaperScissors
     {
         HumanPlayer Human = new HumanPlayer(initPoints:5);
         ComputerPlayer Machine = new ComputerPlayer();
-
+    do {
+        string continueResponse=null;
         while (Human.Points > 0)
         {
             Human.HumanDecision();
@@ -42,8 +43,7 @@ class RockPaperScissors
                         }
                         else
                         {
-                            Human.Points-=1;
-                            humanWin=false;
+                            HumanWinLose(humanWin:false);
                             continue;
                         }
                     case "paper":
@@ -55,12 +55,10 @@ class RockPaperScissors
                         }
                         else
                         {
-                            Human.Points-=1;
-                            humanWin=false;
+                            HumanWinLose(humanWin:false);
                             continue;
                         }
-                } // meat of the program. compare our variables.
-                break;
+                } // meat of the program. compare our variables.;
             }
             else
             {
@@ -68,10 +66,32 @@ class RockPaperScissors
                 humanTie=true;
                 continue;
             }
+            while (continueResponse=="y"||continueResponse=="n")
+            {
+            Console.WriteLine("Play again? Input 'y' to continue or 'n' to exit:");
+            Human.humanContinueOrNot = Console.ReadLine().ToLower();
+            continueResponse=Human.humanContinueOrNot;
+            continue;
+            }
         }
+    } while (Human.humanContinueOrNot!="n"&&Human.Points > 0);
         if (Human.Points==0)
         {
         Console.WriteLine("You now have 0 points and cannot continue. Thank you for playing. Game Over.");
+        }
+
+        void HumanWinLose(bool humanWin, bool humanTie=false)
+        {
+            if (humanWin=true)
+            {
+                Human.Points += 1;
+                Console.WriteLine("You win! +1 point.");
+            }
+            else
+            {
+                Human.Points -=1;
+                Console.WriteLine("You lose! -1 point.");
+            }
         }
     }
 }
@@ -81,6 +101,8 @@ class HumanPlayer
 private int points;
 
 public string humanChoice;
+
+public string humanContinueOrNot;
 
 public int Points {
     get { return points; }

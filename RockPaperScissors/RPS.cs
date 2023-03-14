@@ -3,7 +3,7 @@ class RockPaperScissors
 {
     static void Main(string[] args)
     {
-        HumanPlayer Human = new HumanPlayer(initPoints:5); // declaration of our objects
+        HumanPlayer Human = new HumanPlayer(initPoints:15); // declaration of our objects
         ComputerPlayer Machine = new ComputerPlayer(); 
         PlayGame();
 //
@@ -85,13 +85,13 @@ class RockPaperScissors
         {
             if (humanWin==true)
             {
-                Human.Points += 1;
-                Console.WriteLine("You win! +1 point.");
+                Human.Points +=5;
+                Console.WriteLine("You win! +5 points.");
             }
             else
             {
-                Human.Points -=1;
-                Console.WriteLine("You lose! -1 point.");
+                Human.Points -=5;
+                Console.WriteLine("You lose! -5 points.");
             }
         }
     }

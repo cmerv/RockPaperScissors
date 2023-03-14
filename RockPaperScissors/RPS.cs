@@ -6,7 +6,7 @@ class RockPaperScissors
         HumanPlayer Human = new HumanPlayer(initPoints:5); // declaration of our objects
         ComputerPlayer Machine = new ComputerPlayer(); 
         PlayGame();
-
+//
     void PlayGame() // use of a method for separating the object instantiation from the bulk of the code
     { do {
             Human.humanContinueOrNot=null; // reset status of whether we want to continue, every time loop runs so that we are re-prompted.
@@ -14,9 +14,9 @@ class RockPaperScissors
             Machine.ComputerDecision();
             string machineChoice=Machine.computerChoice;
             string humanChoice=Human.humanChoice;
-            Console.WriteLine($"Computer Decision:{machineChoice}");
-            Console.WriteLine($"Your Decision:{humanChoice}");
-            if (machineChoice!=humanChoice) // efficient way to cut down on if statement usage. kick any equal hands out to the exception.
+            Console.WriteLine($"Computer Decision: {machineChoice}");
+            Console.WriteLine($"Your Decision: {humanChoice}");
+            if (machineChoice!=humanChoice) // efficient way to cut down on nested if statement usage. kick any equal hands out to the exception.
             {
                 switch (humanChoice) // meat of the comparison. only compares two thing: current hand, and hands that are not equal to it
                 {
@@ -67,10 +67,10 @@ class RockPaperScissors
             Human.GetPoints(); // display points
             if (Human.Points > 0){ // prevent infinite loop
             Console.WriteLine("Play again? Input 'y' to continue or 'n' to exit:");
-            Human.humanContinueOrNot = Console.ReadLine().ToLower();
+            Human.humanContinueOrNot = Console.ReadLine()?.ToLower(); // check what the answer is.
             continue;
             }
-            else if (Human.Points == 0)
+            else if (Human.Points == 0) // we must break from the loop when we run out of points to get our endgame message
             {
                 break;
             }
@@ -101,9 +101,9 @@ class HumanPlayer
 {
 private int points; 
 
-public string humanChoice;
+public string? humanChoice = "";
 
-public string humanContinueOrNot;
+public string? humanContinueOrNot;
 
 public int Points {
     get { return points; }
@@ -131,7 +131,7 @@ public string HumanDecision()
     Console.WriteLine("Input your desired shape: Rock, Paper, or Scissors:");
     humanChoice = null;
     humanChoice = Console.ReadLine();
-    humanChoice = humanChoice.ToLower();
+    humanChoice = humanChoice?.ToLower();
     
     while (humanChoice!="rock"||humanChoice!="paper"||humanChoice!="scissors")
     {
@@ -157,7 +157,7 @@ public string HumanDecision()
 
 class ComputerPlayer
 {
-    public string computerChoice;
+    public string computerChoice = "";
     public string ComputerDecision() // computer uses random numbers to determine
     {
         var randObj = new Random();

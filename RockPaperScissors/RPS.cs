@@ -8,9 +8,48 @@ class RockPaperScissors
 
         while (Human.Points > 0)
         {
-            ComputerPlayer.ComputerDecision();
+            Human.HumanDecision();
+            Machine.ComputerDecision();
+            string machineChoice=Machine.computerChoice;
+            string humanChoice=Human.humanChoice;
+            bool humanWin;
+            bool humanTie;
+            Console.WriteLine($"Computer Decision:{machineChoice}");
+            Console.WriteLine($"Your Decision:{humanChoice}");
+            if (machineChoice!=humanChoice)
+            {
+                switch (humanChoice)
+                {
+                    case "rock":
+                        if (machineChoice=="scissors")
+                        {
+                            Human.Points+=1;
+                            humanWin=true;
+                            continue;
+                        }
+                        else 
+                        {
+                            Human.Points-=1;
+                            humanWin=false;
+                            continue;
+                        }
+                    case "scissors":
+
+                    case "paper":
+                } // meat of the program. compare our variables.
+                break;
+            }
+            else
+            {
+                Console.WriteLine("It's a tie.");
+                humanTie=true;
+                continue;
+            }
         }
+        if (Human.Points==0)
+        {
         Console.WriteLine("You now have 0 points and cannot continue. Thank you for playing. Game Over.");
+        }
     }
 }
 
@@ -64,7 +103,7 @@ public string HumanDecision()
 class ComputerPlayer
 {
     public class Random{}
-    public string ComputerChoice;
+    public string computerChoice;
     public string ComputerDecision()
     {
         var randObj = new Random();
@@ -74,12 +113,12 @@ class ComputerPlayer
         switch (randNum)
         {
             case 1:
-            ComputerChoice = "rock";
+            computerChoice = "rock";
             case 2:
-            ComputerChoice = "paper";
+            computerChoice = "paper";
             case 3:
-            ComputerChoice = "scissors";
+            computerChoice = "scissors";
         }
-        return ComputerChoice;
+        return computerChoice;
     }
 }

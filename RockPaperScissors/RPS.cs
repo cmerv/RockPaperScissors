@@ -99,7 +99,7 @@ class RockPaperScissors
 
 class HumanPlayer
 {
-private int points;
+private int points; 
 
 public string humanChoice;
 
@@ -110,7 +110,7 @@ public int Points {
     set { points = value;}
 }
 
-public HumanPlayer (int initPoints) {
+public HumanPlayer (int initPoints) { // constructor giving us our 5 initial point for the object.
     this.Points = initPoints;
 }
 

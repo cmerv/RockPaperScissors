@@ -6,15 +6,11 @@ class RockPaperScissors
         HumanPlayer Human = new HumanPlayer(initPoints:5);
         ComputerPlayer Machine = new ComputerPlayer();
     do {
-        string continueResponse=null;
-        while (Human.Points > 0)
-        {
+            Human.humanContinueOrNot=null;
             Human.HumanDecision();
             Machine.ComputerDecision();
             string machineChoice=Machine.computerChoice;
             string humanChoice=Human.humanChoice;
-            bool humanWin;
-            bool humanTie;
             Console.WriteLine($"Computer Decision:{machineChoice}");
             Console.WriteLine($"Your Decision:{humanChoice}");
             if (machineChoice!=humanChoice)
@@ -25,51 +21,47 @@ class RockPaperScissors
                         if (machineChoice=="scissors")
                         {
                             HumanWinLose(humanWin:true);
-                            continue;
+                            break;
                         }
                         else 
                         {
                             HumanWinLose(humanWin:false);
-                            continue;
+                            break;
                         }
                     case "scissors":
                         if (machineChoice=="paper")
                         {
                             HumanWinLose(humanWin:true);
-                            continue;
+                            break;
                         }
                         else
                         {
                             HumanWinLose(humanWin:false);
-                            continue;
+                            break;
                         }
                     case "paper":
                         if (machineChoice=="rock")
                         {
                             HumanWinLose(humanWin:true);
-                            continue;
+                            break;
                         }
                         else
                         {
                             HumanWinLose(humanWin:false);
-                            continue;
+                            break;
                         }
-                } // meat of the program. compare our variables.;
+                } 
             }
-            else
-            {
+            else if (machineChoice==humanChoice)
+            {  
                 Console.WriteLine("It's a tie.");
-                humanTie=true;
                 continue;
             }
-            while (continueResponse=="y"||continueResponse=="n")
-            {
+            do {
             Console.WriteLine("Play again? Input 'y' to continue or 'n' to exit:");
             Human.humanContinueOrNot = Console.ReadLine().ToLower();
-            continueResponse=Human.humanContinueOrNot;
             continue;
-            }
-        }
+            } while (Human.humanContinueOrNot!="y"&&Human.humanContinueOrNot!="n");
     } while (Human.humanContinueOrNot!="n"&&Human.Points > 0);
         if (Human.Points==0)
         {
@@ -78,7 +70,7 @@ class RockPaperScissors
 
         void HumanWinLose(bool humanWin)
         {
-            if (humanWin=true)
+            if (humanWin==true)
             {
                 Human.Points += 1;
                 Console.WriteLine("You win! +1 point.");
@@ -124,6 +116,7 @@ public void LoseRound()
 public string HumanDecision()
 {
     Console.WriteLine("Input your desired shape: Rock, Paper, or Scissors:");
+    humanChoice = null;
     humanChoice = Console.ReadLine();
     humanChoice = humanChoice.ToLower();
     do {
@@ -144,7 +137,6 @@ public string HumanDecision()
     } while (humanChoice!="rock"||humanChoice!="paper"||humanChoice!="scissors");
 }
 }
-
 
 class ComputerPlayer
 {
